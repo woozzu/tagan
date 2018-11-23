@@ -18,7 +18,7 @@ Download a pretrained [English](https://s3-us-west-1.amazonaws.com/fasttext-vect
 
 The caption data is from [this repository](https://github.com/reedscot/icml2016). After downloading, modify `CONFIG` file so that all paths of the datasets point to the data you downloaded.
 
-# Pretrained models
+## Pretrained models
 - Oxford-102 flowers: [flowers_G.pth](https://www.dropbox.com/s/jb8h8agu6c9zs6r/flowers_G.pth?dl=0)
 - Caltech-200 birds: [birds_G.pth](https://www.dropbox.com/s/owpfetbrmmvj5f4/birds_G.pth?dl=0)
 
