@@ -5,6 +5,7 @@ A PyTorch implementation of the paper ["Text-Adaptive Generative Adversarial Net
 
 ## Requirements
 - [PyTorch](https://github.com/pytorch/pytorch) 0.4
+- [Visdom](https://github.com/facebookresearch/visdom)
 - [Pillow](https://pillow.readthedocs.io/en/4.2.x/)
 - [fastText.py](https://github.com/salestock/fastText.py) (Note: if you have a problem when loading a pretrained model, try [my fixed code](https://github.com/woozzu/fastText.py/tree/feature/udpate-fasttext-to-f24a781-fix))
 - [NLTK](http://www.nltk.org)
@@ -33,9 +34,9 @@ Train a network. If you want to change arguments, please refer to `train.py`.
 Test a trained network. After running it, please see `./test/result_[flowers/birds]/index.html`.
 
 ## Results
-![Flowers](images/results_flowers.png)
+![Flowers](images/results_flowers.jpg)
 
-![Birds](images/results_birds.png)
+![Birds](images/results_birds.jpg)
 
 
 ## Citation
