@@ -1,2 +1,47 @@
-# tagan
-A PyTorch implementation of the paper "Text-Adaptive Generative Adversarial Networks: Manipulating Images with Natural Language", NIPS 2018
+# Text-Adaptive Generative Adversarial Network (TAGAN)
+A PyTorch implementation of the paper ["Text-Adaptive Generative Adversarial Networks: Manipulating Images with Natural Language"](http://snam.ml/assets/tagan_nips18/tagan.pdf). This code implements a Text-Adaptive Generative Adversarial Network (TAGAN) for manipulating images with natural language.
+
+![Model architecture](images/architecture.png)
+
+## Requirements
+- [PyTorch](https://github.com/pytorch/pytorch) 0.4
+- [Pillow](https://pillow.readthedocs.io/en/4.2.x/)
+- [fastText.py](https://github.com/salestock/fastText.py) (Note: if you have a problem when loading a pretrained model, try [my fixed code](https://github.com/woozzu/fastText.py/tree/feature/udpate-fasttext-to-f24a781-fix))
+- [NLTK](http://www.nltk.org)
+
+## Pretrained word vectors for fastText
+Download a pretrained [English](https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.en.zip) word vectors. You can see the list of pretrained vectors on [this page](https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md).
+
+## Datasets
+- Oxford-102 flowers: [images](http://www.robots.ox.ac.uk/~vgg/data/flowers/102) and [captions](https://drive.google.com/file/d/0B0ywwgffWnLLMl9uOU91MV80cVU/view?usp=sharing)
+- Caltech-200 birds: [images](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html) and [captions](https://drive.google.com/file/d/0B0ywwgffWnLLLUc2WHYzM0Q2eWc/view?usp=sharing)
+
+The caption data is from [this repository](https://github.com/reedscot/icml2016). After downloading, modify `CONFIG` file so that all paths of the datasets point to the data you downloaded.
+
+## Run
+- `scripts/preprocess_caption.sh`  
+Preprocess caption data using fastText embedding. You only need to run it once before training.
+- `scripts/train_[birds/flowers].sh`  
+Train a network. If you want to change arguments, please refer to `train.py`.
+- `scripts/test_[birds/flowers].sh`  
+Test a trained network. After running it, please see `./test/result_[birds/flowers]/index.html`.
+
+## Results
+![Flowers](images/results_flowers.png)
+
+![Birds](images/results_birds.png)
+
+
+## Citation
+Please cite our paper when you use this code.
+```
+@inproceedings{nam2018tagan,
+  title={Text-Adaptive Generative Adversarial Networks: Manipulating Images with Natural Language},
+  author={Nam, Seonghyeon and Kim, Yunji and Kim, Seon Joo},
+  booktitle={Advances in Neural Information Processing Systems (NIPS)},
+  year={2018}
+}
+```
+
+## Contact
+Please contact [shnnam@yonsei.ac.kr](shnnam@yonsei.ac.kr) if you have any question about this work.
