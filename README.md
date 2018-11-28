@@ -45,7 +45,7 @@ Please cite our paper when you use this code.
 @inproceedings{nam2018tagan,
   title={Text-Adaptive Generative Adversarial Networks: Manipulating Images with Natural Language},
   author={Nam, Seonghyeon and Kim, Yunji and Kim, Seon Joo},
-  booktitle={Advances in Neural Information Processing Systems (NIPS)},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
   year={2018}
 }
 ```
