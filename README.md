@@ -4,7 +4,7 @@ A PyTorch implementation of the paper ["Text-Adaptive Generative Adversarial Net
 ![Model architecture](images/architecture.png)
 
 ## Requirements
-- [PyTorch](https://github.com/pytorch/pytorch) 0.4
+- [PyTorch](https://github.com/pytorch/pytorch) 1.0
 - [torchfile](https://github.com/bshillingford/python-torchfile)
 - [Visdom](https://github.com/facebookresearch/visdom)
 - [Pillow](https://pillow.readthedocs.io/en/4.2.x/)
