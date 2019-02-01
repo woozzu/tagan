@@ -1,6 +1,6 @@
 import os
 import argparse
-import fasttext
+import fastText
 
 from data import ConvertCapVec
 
@@ -20,6 +20,6 @@ if __name__ == '__main__':
     if (caption_root + '_vec') not in os.listdir(args.caption_root.replace(caption_root, '')):
         os.makedirs(args.caption_root + '_vec')
         print('Loading a pretrained fastText model...')
-        word_embedding = fasttext.load_model(args.fasttext_model)
+        word_embedding = fastText.load_model(args.fasttext_model)
         print('Making vectorized caption data files...')
         ConvertCapVec().convert_and_save(args.caption_root, word_embedding, args.max_nwords)

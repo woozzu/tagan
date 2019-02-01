@@ -7,8 +7,8 @@ from nltk.tokenize import RegexpTokenizer
 
 import torch
 import torch.utils.data as data
-from torch.utils.serialization import load_lua
 import torchvision.transforms as transforms
+import torchfile
 
 
 def split_sentence_into_words(sentence):
@@ -37,7 +37,7 @@ class ReedICML2016(data.Dataset):
         for i in range(desc.shape[1]):
             words = self._nums2chars(desc[:, i])
             words = split_sentence_into_words(words)
-            word_vecs = torch.Tensor([word_embedding[w] for w in words])
+            word_vecs = torch.Tensor([word_embedding.get_word_vector(w) for w in words])
             # zero padding
             if len(words) < max_word_length:
                 word_vecs = torch.cat((
@@ -72,11 +72,11 @@ class DatasetFromRAW(ReedICML2016):
                 cls = line.replace('\n', '')
                 filenames = os.listdir(os.path.join(caption_root, cls))
                 for filename in filenames:
-                    datum = load_lua(os.path.join(caption_root, cls, filename))
-                    raw_desc = datum['char'].numpy()
+                    datum = torchfile.load(os.path.join(caption_root, cls, filename))
+                    raw_desc = datum.char
                     desc, len_desc = self._get_word_vectors(raw_desc, word_embedding, self.max_word_length)
                     output.append({
-                        'img': os.path.join(img_root, datum['img']),
+                        'img': os.path.join(img_root, datum.img),
                         'desc': desc,
                         'len_desc': len_desc
                     })
@@ -109,10 +109,10 @@ class ConvertCapVec(ReedICML2016):
             os.makedirs(caption_root + '_vec/' + cls)
             filenames = os.listdir(os.path.join(caption_root, cls))
             for filename in filenames:
-                datum = load_lua(os.path.join(caption_root, cls, filename))
-                raw_desc = datum['char'].numpy()
+                datum = torchfile.load(os.path.join(caption_root, cls, filename))
+                raw_desc = datum.char
                 desc, len_desc = self._get_word_vectors(raw_desc, word_embedding, max_word_length)
-                torch.save({'img': datum['img'], 'word_vec': desc, 'len_desc': len_desc},
+                torch.save({'img': datum.img, 'word_vec': desc, 'len_desc': len_desc},
                             os.path.join(caption_root + '_vec', cls, filename[:-2] + 'pth'))
 
 
@@ -133,7 +133,7 @@ class ReadFromVec(data.Dataset):
                 for filename in filenames:
                     datum = torch.load(os.path.join(caption_root + '_vec', cls, filename))
                     output.append({
-                        'img': os.path.join(img_root, datum['img']),
+                        'img': os.path.join(bytes(img_root, 'utf-8'), datum['img']),
                         'word_vec': datum['word_vec'],
                         'len_desc': datum['len_desc']
                     })
