@@ -1,6 +1,6 @@
 import os
 import argparse
-import fasttext
+import fastText
 from PIL import Image
 import cv2
 import numpy as np
@@ -39,7 +39,7 @@ if __name__ == '__main__':
         os.makedirs(args.output_root)
 
     print('Loading a pretrained fastText model...')
-    word_embedding = fasttext.load_model(args.fasttext_model)
+    word_embedding = fastText.load_model(args.fasttext_model)
 
     print('Loading a pretrained model...')
     G = Generator().to(device)
@@ -71,7 +71,7 @@ if __name__ == '__main__':
     for i, text in enumerate(texts):
         text = text.replace('\n', '')
         words = split_sentence_into_words(text)
-        txt = torch.tensor([word_embedding[w] for w in words], device=device)
+        txt = torch.tensor([word_embedding.get_word_vector(w) for w in words], device=device)
         txt = txt.unsqueeze(1)
         txt = txt.repeat(1, img.size(0), 1)
         len_txt = torch.tensor([len(words)], dtype=torch.long, device=device)
